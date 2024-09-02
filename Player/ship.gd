@@ -1,5 +1,6 @@
 extends Sprite2D
 var top_speed: float = 0.0
+var velocity: Vector2 = Vector2.ZERO
 # Timer Node
 @onready var boost_timer: Timer = get_node("Boost Timer")
 
@@ -7,6 +8,7 @@ var top_speed: float = 0.0
 @export_range(100.0, 1000.0, 1.0, "suffix:px/s") var base_speed: float = 300.0
 @export_range(100.0, 1000.0, 1.0, "suffix:ps/s") var boost_speed: float = 700.0
 @export_range(1, 5, 1, "suffix:sec") var boost_time: int = 1
+@export_range(1, 100, 1) var steering_factor: float = 10.0
 
 
 func _ready() -> void:
@@ -14,7 +16,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
-	var velocity: Vector2 = Vector2.ZERO
+	var steering_vector: Vector2 = Vector2.ZERO
+	var target_vector: Vector2 = Vector2.ZERO
 
 	# Get Directional Vectors
 	direction.x = Input.get_axis("move_left", "move_right")
@@ -29,9 +32,14 @@ func _process(delta: float) -> void:
 		top_speed = boost_speed
 		boost_timer.start(boost_time)
 
-	# Calculate velocity by combining direction and speed
-	velocity = direction * top_speed
-
+	# Set Target Vector (TV)
+	target_vector = direction * top_speed
+	# Set Steering Vector (SV): subtract current velocity from TV
+	steering_vector = target_vector - velocity
+	
+	# Update Curr Velocity: Add SV and velocity
+	# Shorten the sum by multilying it to the steer factor and delta 
+	velocity += steering_vector * steering_factor * delta
 	# Update player position using velocity
 	position += velocity * delta
 

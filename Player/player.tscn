@@ -11,6 +11,7 @@ texture = ExtResource("1_j4ik2")
 script = ExtResource("2_0a812")
 base_speed = 500.0
 boost_time = 2
+steering_factor = 5.0
 
 [node name="Boost Timer" type="Timer" parent="Ship"]
 one_shot = true
