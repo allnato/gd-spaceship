@@ -9,4 +9,10 @@
 position = Vector2(582, 333)
 texture = ExtResource("1_j4ik2")
 script = ExtResource("2_0a812")
-top_speed = 480
+base_speed = 500.0
+boost_time = 2
+
+[node name="Boost Timer" type="Timer" parent="Ship"]
+one_shot = true
+
+[connection signal="timeout" from="Ship/Boost Timer" to="Ship" method="_on_boost_timer_timeout"]
