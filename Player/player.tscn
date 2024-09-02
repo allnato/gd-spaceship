@@ -15,4 +15,7 @@ steering_factor = 5.0
 [node name="Boost Timer" type="Timer" parent="Ship"]
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="Ship"]
+position_smoothing_enabled = true
+
 [connection signal="timeout" from="Ship/Boost Timer" to="Ship" method="_on_boost_timer_timeout"]
