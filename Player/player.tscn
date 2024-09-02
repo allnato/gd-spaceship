@@ -9,8 +9,7 @@
 position = Vector2(582, 333)
 texture = ExtResource("1_j4ik2")
 script = ExtResource("2_0a812")
-base_speed = 500.0
-boost_time = 2
+boost_speed = 900.0
 steering_factor = 5.0
 
 [node name="Boost Timer" type="Timer" parent="Ship"]
