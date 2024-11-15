@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2dlk5cr1viie"]
+[gd_scene load_steps=4 format=3 uid="uid://d2dlk5cr1viie"]
 
 [ext_resource type="Texture2D" uid="uid://dvym5spa85cgq" path="res://Assets/Ship.png" id="1_j4ik2"]
 [ext_resource type="Script" path="res://Player/ship.gd" id="2_0a812"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6flvl"]
+size = Vector2(74, 98)
 
-[node name="Ship" type="Sprite2D" parent="."]
-position = Vector2(582, 333)
-texture = ExtResource("1_j4ik2")
+[node name="Player" type="Area2D"]
 script = ExtResource("2_0a812")
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_j4ik2")
+
+[node name="ShipCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6flvl")
