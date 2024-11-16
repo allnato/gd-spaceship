@@ -27,10 +27,6 @@ func _process(delta: float) -> void:
 	if direction.length() > 1.0:
 		direction = direction.normalized()
 
-	# Rotate ship with regards to direction
-	if direction != Vector2.ZERO:
-		rotation = direction.angle()
-
 
 	if Input.is_action_just_pressed("boost_ship"):
 		BoostTimer.start()
@@ -43,6 +39,8 @@ func _process(delta: float) -> void:
 	# Apply normal speed
 	position += current_velocity * delta
 
+	if direction != Vector2.ZERO:
+		rotation = current_velocity.angle()
 
 func _on_ship_boost_timer_timeout() -> void:
 	current_speed = ship_speed
